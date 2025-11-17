@@ -587,14 +587,14 @@ For detailed setup instructions, see the [Quick Start](#-quick-start) guide abov
 - [x] REST API with authentication
 - [x] Mobile-responsive design
 - [x] View counter and analytics
+- [x] Dark mode support
+- [x] Related posts recommendations
 
 ### Planned Features 🚧
 - [ ] Search functionality
 - [ ] Newsletter integration (Mailchimp, ConvertKit)
 - [ ] Comment system (Disqus, Giscus)
-- [ ] Related posts recommendations
 - [ ] Multi-author support with profiles
-- [ ] Dark mode toggle
 - [ ] RSS feed
 - [ ] Admin dashboard
 - [ ] Draft posts management

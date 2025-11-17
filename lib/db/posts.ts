@@ -209,3 +209,123 @@ export async function updatePost(slug: string, data: Partial<CreatePostData>): P
 
   return await getPostBySlug(slug);
 }
+
+export async function getRelatedPosts(currentSlug: string, limit: number = 2): Promise<Post[]> {
+  const currentPost = await getPostBySlug(currentSlug);
+  if (!currentPost) return [];
+
+  const relatedPosts: Post[] = [];
+  const seenIds = new Set<number>();
+
+  // Parse current post's tags
+  let currentTags: string[] = [];
+  try {
+    currentTags = JSON.parse(currentPost.tags);
+  } catch {
+    currentTags = [];
+  }
+
+  // Extract keywords from title (words longer than 3 characters, excluding common words)
+  const stopWords = ['the', 'and', 'for', 'with', 'this', 'that', 'from', 'have', 'will', 'your', 'are', 'not'];
+  const titleWords = currentPost.title
+    .toLowerCase()
+    .replace(/[^\w\s]/g, ' ')
+    .split(/\s+/)
+    .filter(word => word.length > 3 && !stopWords.includes(word));
+
+  // 1. Try to find posts with matching title keywords
+  if (relatedPosts.length < limit && titleWords.length > 0) {
+    for (const keyword of titleWords) {
+      if (relatedPosts.length >= limit) break;
+
+      const result = await client.execute({
+        sql: `
+          SELECT * FROM posts
+          WHERE slug != ? AND id NOT IN (${seenIds.size > 0 ? Array.from(seenIds).join(',') : '0'})
+          AND LOWER(title) LIKE ?
+          ORDER BY publishedAt DESC
+          LIMIT ?
+        `,
+        args: [currentSlug, `%${keyword}%`, limit - relatedPosts.length]
+      });
+
+      const posts = result.rows as unknown as Post[];
+      for (const post of posts) {
+        if (!seenIds.has(post.id)) {
+          relatedPosts.push(post);
+          seenIds.add(post.id);
+        }
+      }
+    }
+  }
+
+  // 2. Try to find posts with matching tags
+  if (relatedPosts.length < limit && currentTags.length > 0) {
+    for (const tag of currentTags) {
+      if (relatedPosts.length >= limit) break;
+
+      const result = await client.execute({
+        sql: `
+          SELECT * FROM posts
+          WHERE slug != ? AND id NOT IN (${seenIds.size > 0 ? Array.from(seenIds).join(',') : '0'})
+          AND tags LIKE ?
+          ORDER BY publishedAt DESC
+          LIMIT ?
+        `,
+        args: [currentSlug, `%"${tag}"%`, limit - relatedPosts.length]
+      });
+
+      const posts = result.rows as unknown as Post[];
+      for (const post of posts) {
+        if (!seenIds.has(post.id)) {
+          relatedPosts.push(post);
+          seenIds.add(post.id);
+        }
+      }
+    }
+  }
+
+  // 3. Try to find posts from the same category
+  if (relatedPosts.length < limit) {
+    const result = await client.execute({
+      sql: `
+        SELECT * FROM posts
+        WHERE slug != ? AND category = ? AND id NOT IN (${seenIds.size > 0 ? Array.from(seenIds).join(',') : '0'})
+        ORDER BY publishedAt DESC
+        LIMIT ?
+      `,
+      args: [currentSlug, currentPost.category, limit - relatedPosts.length]
+    });
+
+    const posts = result.rows as unknown as Post[];
+    for (const post of posts) {
+      if (!seenIds.has(post.id)) {
+        relatedPosts.push(post);
+        seenIds.add(post.id);
+      }
+    }
+  }
+
+  // 4. Fallback: Get freshest posts
+  if (relatedPosts.length < limit) {
+    const result = await client.execute({
+      sql: `
+        SELECT * FROM posts
+        WHERE slug != ? AND id NOT IN (${seenIds.size > 0 ? Array.from(seenIds).join(',') : '0'})
+        ORDER BY publishedAt DESC
+        LIMIT ?
+      `,
+      args: [currentSlug, limit - relatedPosts.length]
+    });
+
+    const posts = result.rows as unknown as Post[];
+    for (const post of posts) {
+      if (!seenIds.has(post.id)) {
+        relatedPosts.push(post);
+        seenIds.add(post.id);
+      }
+    }
+  }
+
+  return relatedPosts.slice(0, limit);
+}

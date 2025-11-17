@@ -3,10 +3,11 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import dynamicImport from 'next/dynamic';
-import { getPostBySlug, incrementViews, getAllPosts, EmbeddedMedia } from '@/lib/db/posts';
+import { getPostBySlug, incrementViews, getAllPosts, EmbeddedMedia, getRelatedPosts } from '@/lib/db/posts';
 import { formatDate, calculateReadingTime } from '@/lib/utils';
 import { getShimmerDataURL } from '@/lib/image-utils';
 import MediaEmbed from '@/components/MediaEmbed';
+import PostCard from '@/components/PostCard';
 
 // Force dynamic rendering for pages that use the database
 export const dynamic = 'force-dynamic';
@@ -85,6 +86,9 @@ export default async function PostPage({ params }: PostPageProps) {
   const embeddedMedia: EmbeddedMedia[] = post.embeddedMedia ? JSON.parse(post.embeddedMedia) : [];
   const readingTime = calculateReadingTime(post.content);
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+
+  // Get related posts
+  const relatedPosts = await getRelatedPosts(params.slug, 2);
 
   // JSON-LD structured data
   const jsonLd = {
@@ -228,6 +232,33 @@ export default async function PostPage({ params }: PostPageProps) {
                   <ShareButtons title={post.title} slug={post.slug} />
                 </div>
               </footer>
+
+              {/* Related Posts */}
+              {relatedPosts.length > 0 && (
+                <section className="mt-16 pt-12 border-t border-gray-200 dark:border-gray-700">
+                  <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8">
+                    Continue your reading
+                  </h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {relatedPosts.map((relatedPost) => {
+                      const relatedTags = JSON.parse(relatedPost.tags);
+                      return (
+                        <PostCard
+                          key={relatedPost.id}
+                          slug={relatedPost.slug}
+                          title={relatedPost.title}
+                          excerpt={relatedPost.excerpt}
+                          author={relatedPost.author}
+                          publishedAt={relatedPost.publishedAt}
+                          tags={relatedTags}
+                          coverImage={relatedPost.coverImage}
+                          category={relatedPost.category}
+                        />
+                      );
+                    })}
+                  </div>
+                </section>
+              )}
             </div>
 
             {/* Sidebar - Table of Contents */}
