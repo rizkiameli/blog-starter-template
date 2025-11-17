@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getAllPosts } from '@/lib/db/posts';
 import PostCard from '@/components/PostCard';
+import NewsletterSignup from '@/components/NewsletterSignup';
 
 // Force dynamic rendering for pages that use the database
 export const dynamic = 'force-dynamic';
@@ -129,16 +130,7 @@ export default async function Home() {
             Subscribe to our newsletter for the latest updates, articles, and insights delivered straight to your inbox.
           </p>
           <div className="mt-8 flex justify-center fade-in-delay-2">
-            <div className="flex gap-4 w-full max-w-md">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 rounded-lg border-0 text-gray-900 dark:text-gray-100 dark:bg-gray-800 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-2 focus:ring-white dark:focus:ring-accent-400 shadow-lg focus:shadow-xl transition-shadow"
-              />
-              <button className="px-6 py-3 bg-white dark:bg-gray-100 text-accent-600 dark:text-accent-700 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-white hover:shadow-xl transition-all hover:scale-105 active:scale-100 shadow-lg">
-                Subscribe
-              </button>
-            </div>
+            <NewsletterSignup />
           </div>
         </div>
       </section>

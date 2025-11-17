@@ -53,6 +53,19 @@ async function initDatabase() {
     await client.execute('CREATE INDEX IF NOT EXISTS idx_posts_publishedAt ON posts(publishedAt DESC)');
     await client.execute('CREATE INDEX IF NOT EXISTS idx_posts_category ON posts(category)');
 
+    console.log('💌 Creating newsletter_emails table...');
+    await client.execute(`
+      CREATE TABLE IF NOT EXISTS newsletter_emails (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        email TEXT UNIQUE NOT NULL,
+        subscribedAt TEXT NOT NULL
+      )
+    `);
+
+    console.log('📊 Creating newsletter indexes...');
+    await client.execute('CREATE INDEX IF NOT EXISTS idx_newsletter_emails_email ON newsletter_emails(email)');
+    await client.execute('CREATE INDEX IF NOT EXISTS idx_newsletter_emails_subscribedAt ON newsletter_emails(subscribedAt DESC)');
+
     console.log('✅ Database initialized successfully!');
     console.log('');
     console.log('Next steps:');

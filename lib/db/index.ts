@@ -52,6 +52,19 @@ async function initializeDatabase() {
   await client.execute('CREATE INDEX IF NOT EXISTS idx_comments_postSlug ON comments(postSlug)');
   await client.execute('CREATE INDEX IF NOT EXISTS idx_comments_parentId ON comments(parentId)');
   await client.execute('CREATE INDEX IF NOT EXISTS idx_comments_createdAt ON comments(createdAt DESC)');
+
+  // Create newsletter_emails table
+  await client.execute(`
+    CREATE TABLE IF NOT EXISTS newsletter_emails (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      email TEXT UNIQUE NOT NULL,
+      subscribedAt TEXT NOT NULL
+    )
+  `);
+
+  // Create index for newsletter emails
+  await client.execute('CREATE INDEX IF NOT EXISTS idx_newsletter_emails_email ON newsletter_emails(email)');
+  await client.execute('CREATE INDEX IF NOT EXISTS idx_newsletter_emails_subscribedAt ON newsletter_emails(subscribedAt DESC)');
 }
 
 // Initialize on module load (only in development)
