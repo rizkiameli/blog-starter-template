@@ -49,6 +49,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/feed" />
         {/* Critical inline CSS for immediate rendering - prevents FOUC and improves LCP */}
         <style dangerouslySetInnerHTML={{ __html: `
           *,::before,::after{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}
