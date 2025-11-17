@@ -210,6 +210,21 @@ export async function updatePost(slug: string, data: Partial<CreatePostData>): P
   return await getPostBySlug(slug);
 }
 
+export async function searchPosts(query: string): Promise<Post[]> {
+  const searchTerm = `%${query}%`;
+  const result = await client.execute({
+    sql: `
+      SELECT * FROM posts
+      WHERE LOWER(title) LIKE LOWER(?)
+         OR LOWER(excerpt) LIKE LOWER(?)
+         OR LOWER(content) LIKE LOWER(?)
+      ORDER BY publishedAt DESC
+    `,
+    args: [searchTerm, searchTerm, searchTerm]
+  });
+  return result.rows as unknown as Post[];
+}
+
 export async function getRelatedPosts(currentSlug: string, limit: number = 2): Promise<Post[]> {
   const currentPost = await getPostBySlug(currentSlug);
   if (!currentPost) return [];
