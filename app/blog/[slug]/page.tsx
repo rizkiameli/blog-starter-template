@@ -32,6 +32,10 @@ const Comments = dynamicImport(() => import('@/components/Comments'), {
   ssr: false, // Client-side only component
 });
 
+const BackToTop = dynamicImport(() => import('@/components/BackToTop'), {
+  ssr: false, // Client-side only component
+});
+
 interface PostPageProps {
   params: { slug: string };
 }
@@ -272,6 +276,9 @@ export default async function PostPage({ params }: PostPageProps) {
             <TableOfContents markdown={post.content} />
           </div>
         </div>
+
+        {/* Back to Top Button */}
+        <BackToTop />
       </article>
     </>
   );
